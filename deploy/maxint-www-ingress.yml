@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: maxint-www-ingress
+spec:
+  tls:
+    - secretName: maxint-www-cert
+      hosts:
+        - maxint.co
+        - www.maxint.co
+  backend:
+    serviceName: maxint-www-svc
+    servicePort: 3000
+  rules:
+  - host: www.maxint.co
+    http:
+      paths:
+      - backend:
+          serviceName: maxint-www-svc
+          servicePort: 3000
+  - host: maxint.co
+    http:
+      paths:
+      - backend:
+          serviceName: maxint-www-svc
+          servicePort: 3000

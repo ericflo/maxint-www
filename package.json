@@ -1,0 +1,22 @@
+{
+  "name": "maxint-www",
+  "version": "1.0.0",
+  "description": "Maxint is the company website.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "prune": "node yarn-prune.js",
+    "start": "next start",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{pages,lib,components}/**/*.js\"",
+    "deploy": "NODE_ENV=production docker build -t gcr.io/gradientzoo-1233/maxint-www:latest . && gcloud docker -- push gcr.io/gradientzoo-1233/maxint-www:latest && kubectl delete pod -l app=maxint-www"
+  },
+  "author": "Eric Florenzano",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^3.0.1-beta.16",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {}
+}
