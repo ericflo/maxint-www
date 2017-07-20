@@ -18,12 +18,14 @@ spec:
   - host: www.maxint.co
     http:
       paths:
-      - backend:
+      - path: /*
+        backend:
           serviceName: maxint-www-svc
           servicePort: 3000
   - host: maxint.co
     http:
       paths:
-      - backend:
+      - path: /*
+        backend:
           serviceName: maxint-www-svc
           servicePort: 3000
