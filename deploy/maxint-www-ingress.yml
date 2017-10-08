@@ -5,24 +5,18 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   tls:
     - secretName: maxint-www-cert
       hosts:
-        - maxint.co
         - www.maxint.co
   backend:
     serviceName: maxint-www-svc
     servicePort: 3000
   rules:
   - host: www.maxint.co
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: maxint-www-svc
-          servicePort: 3000
-  - host: maxint.co
     http:
       paths:
       - path: /
