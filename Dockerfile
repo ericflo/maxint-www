@@ -1,25 +1,8 @@
-FROM node:boron-alpine
+# syntax=docker/dockerfile:1
 
-# Make sure git is available
-RUN apk add --update git && \
-  rm -rf /tmp/* /var/cache/apk/*
+FROM nginxinc/nginx-unprivileged:1.27-alpine@sha256:65e3e85dbaed8ba248841d9d58a899b6197106c23cb0ff1a132b7bfe0547e4c0
 
-# Set up environment variables
-ENV NODE_ENV production
-ENV BUILD_VERSION 1
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY site/index.html /usr/share/nginx/html/index.html
 
-# Create app directory
-RUN mkdir -p /app
-WORKDIR /app
-
-# Bundle app source
-COPY . /app
-
-# Install app dependencies, build production bundle, and clean up afterwards
-RUN yarn && \
-  yarn run build && \
-  yarn run prune && \
-  yarn cache clean
-
-EXPOSE 3000
-CMD [ "yarn", "run", "start" ]
+EXPOSE 8080
