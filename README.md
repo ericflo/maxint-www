@@ -18,3 +18,7 @@ not become a second source of truth.
 Pushes to `master` run `.woodpecker.yaml` inside Epsilon. After validation, the
 cluster publishes an immutable image and Flux promotes its exact digest; no
 GitHub Actions runner, `kubectl` command, or second Epsilon edit is required.
+
+A release is complete only after the signed Epsilon promotion reconciles and
+`https://maxint.co/health` returns HTTP 200. Roll back by reverting that exact
+image digest in Epsilon; never retag an image or deploy from here.
