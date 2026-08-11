@@ -14,3 +14,7 @@ curl --fail http://127.0.0.1:8080/health
 The Kubernetes deployment lives in the private `epsilon` repository. This
 repository owns only the site and its image, so obsolete cluster manifests do
 not become a second source of truth.
+
+Pushes to `master` run `.woodpecker.yaml` inside Epsilon. After validation, the
+cluster publishes an immutable image and Flux promotes its exact digest; no
+GitHub Actions runner, `kubectl` command, or second Epsilon edit is required.
